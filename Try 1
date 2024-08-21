@@ -24,7 +24,6 @@
 #define TWO_ROOTS 2
 #define EPS 0.00000001
 
-
 struct square
 {
     double a;
@@ -42,55 +41,64 @@ int RunTest(double a, double b, double c, double expected_x1, double expected_x2
 
 int main()
 {
-    double x1 = 0, x2 = 0;
-    struct square first = {};
-    first.x1 = &x1;
-    first.x2 = &x2;
+    printf("If you want to solve the square print 1\n");
+    printf("If you want to check tests print 2\n");
 
-    printf("# SquareSolver\n" "# (c), Ann, 2024\n");
-    printf("# Enter a, b, c: ");
+    int flag;
+    scanf("%d", &flag);
 
-
-    while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+    if (flag == 1)
     {
-        Clear_board();
+        double x1 = 0, x2 = 0;
+        struct square first = {};
+        first.x1 = &x1;
+        first.x2 = &x2;
 
-        printf("Enter again please\n");
+        printf("# SquareSolver\n" "# (c), Ann, 2024\n");
+        printf("# Enter a, b, c: ");
+
+
+        while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+        {
+            Clear_board();
+
+            printf("Enter again please\n");
+        }
+
+        int NumRoots = SquareSolver(first);
+
+        switch (NumRoots)
+        {
+            case NO_ROOTS:
+
+                printf("No solutions\n");
+
+                break;
+
+
+            case ONE_ROOT:
+
+                printf("x = %lg\n", *first.x1);
+
+                break;
+
+
+            case TWO_ROOTS:
+
+                printf("x1 = %lg, x2 = %lg\n", *first.x1, *first.x2);
+
+                break;
+
+            case INF_ROOTS:
+
+                printf("Any number\n");
+
+                break;
+
+        }
     }
-
-    int NumRoots = SquareSolver(first);
-
-    switch (NumRoots)
-    {
-        case NO_ROOTS:
-
-            printf("No solutions\n");
-
-            break;
-
-
-        case ONE_ROOT:
-
-            printf("x = %lg\n", *first.x1);
-
-            break;
-
-
-        case TWO_ROOTS:
-
-            printf("x1 = %lg, x2 = %lg\n", *first.x1, *first.x2);
-
-            break;
-
-        case INF_ROOTS:
-
-            printf("Any number\n");
-
-            break;
-
-    }
-
-    CheckProgram();
+    else
+        CheckProgram();
 }
 
 int SquareSolver(struct square first)
@@ -190,14 +198,22 @@ int RunTest(double a, double b, double c, double expected_x1, double expected_x2
 
 void CheckProgram()
 {
-    printf("%d ", RunTest(1, 4, 3, -1, -3, 2));
-    printf("%d ", RunTest(1, 2, 3, 0, 0, 0));
-    printf("%d ", RunTest(1, -2, 1, 1, 0, 1));
-    printf("%d ", RunTest(1, 5, 2.25, -0.5, -4.5, 2));
-    printf("%d ", RunTest(0, 0, 0, 0, 0, -1));
-    printf("%d ", RunTest(0, 5, 1, -0.2, 0, 1));
-    printf("%d ", RunTest(1, 0, -4, 2, -2, 2));
-    printf("%d ", RunTest(1, 0, 0, 0, 0, 1));
-    printf("%d ", RunTest(4, 2, 0, 0, -0.5, 2));
+    int ans[10];
+    ans[0] = RunTest(1,  4,  3,   -1,   -3,   2); //D > 0, два корня
+    ans[1] = RunTest(1,  2,  3,    0,    0,   0); //D < 0, нет корней
+    ans[2] = RunTest(1, -2,  1,    1,    0,   1); //D = 0, один корень
+    ans[3] = RunTest(1,  5, 2.25, -0.5, -4.5, 2); //Дробный коэффициент
+    ans[4] = RunTest(0,  0,  0,    0,    0,  -1); //a = 0, b = 0, c = 0, бесконечные решения
+    ans[5] = RunTest(0,  0,  1,    0,    0,   0); //a = 0, b = 0, нет корней
+    ans[6] = RunTest(0,  5,  1,   -0.2,  0,   1); //а = 0, один корень
+    ans[7] = RunTest(1,  0, -4,    2,   -2,   2); //b = 0, два корня
+    ans[8] = RunTest(1,  0,  0,    0,    0,   1); //b = 0, с = 0, один корень
+    ans[9] = RunTest(4,  2,  0,    0,   -0.5, 2); //с = 0, два корня
+    int i = 0;
+    while (i < 10)
+    {
+        printf("Test %d: %d ", i + 1, ans[i]);
+        i++;
+    }
 
 }
