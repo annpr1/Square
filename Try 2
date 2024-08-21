@@ -1,0 +1,147 @@
+//-------------------------------------------------
+//! Solves a square equation ax2 + bx + c = 0
+//!
+//! @param [in] a a-coefficient
+//! @param [in] b b-coefficient
+//! @param [in] c c-coefficient
+//! @param [out] x1 first root
+//! @param [out] x2 second root
+//!
+//! @return number of roots
+//!
+//! @note   INF_ROOTS - infinity numbers of roots
+//!
+//-------------------------------------------------
+
+#include <stdio.h>
+#include <math.h>
+#include <assert.h>
+#include <string.h>
+
+#define INF_ROOTS -1
+#define NO_ROOTS  0
+#define ONE_ROOT  1
+#define TWO_ROOTS 2
+#define EPS 0.00000001
+
+
+struct square
+{
+    double a;
+    double b;
+    double c;
+    double* x1;
+    double* x2;
+};
+
+int SquareSolver(struct square first);
+int Compare_with_null(double n);
+int Clear_board();
+int RunTest(double a, double b, double c, double expected_x1, double expected_x2, int expected_numRoots);
+
+
+int main()
+{
+    double x1 = 0, x2 = 0;
+    struct square first = {};
+    first.x1 = &x1;
+    first.x2 = &x2;
+
+    printf("# SquareSolver\n" "# (c), Ann, 2024\n");
+    printf("# Enter a, b, c: ");
+
+
+    while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+    {
+        Clear_board();
+
+        printf("Enter again please\n");
+    }
+
+    int NumRoots = SquareSolver(first);
+
+    switch (NumRoots)
+    {
+        case NO_ROOTS:
+
+            printf("No solutions\n");
+
+            break;
+
+
+        case ONE_ROOT:
+
+            printf("x = %lg\n", *first.x1);
+
+            break;
+
+
+        case TWO_ROOTS:
+
+            printf("x1 = %lg, x2 = %lg\n", *first.x1, *first.x2);
+
+            break;
+
+        case INF_ROOTS:
+
+            printf("Any number\n");
+
+            break;
+
+    }
+}
+
+int SquareSolver(struct square first)
+{
+    assert(first.x1 != NULL);
+    assert(first.x2 != NULL);
+    assert(first.x1 != first.x2);
+
+    if (Compare_with_null(first.a))
+    {
+        if (Compare_with_null(first.b))
+        {
+            return (Compare_with_null(first.c)) ? INF_ROOTS : NO_ROOTS;
+        }
+        else
+        {
+            *first.x1 = -first.c / first.b;
+            return ONE_ROOT;
+        }
+    }
+    else
+    {
+        if ((pow(first.b, 2) - 4 * first.a * first.c) > 0)
+        {
+            *first.x1 = (-first.b + sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
+            *first.x2 = (-first.b - sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
+            return TWO_ROOTS;
+        }
+        else if ((pow(first.b, 2) - 4 * first.a * first.c) < 0)
+            return NO_ROOTS;
+        else
+        {
+            *first.x1 = (-first.b + sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
+            return ONE_ROOT;
+        }
+    }
+
+}
+
+int Compare_with_null(double n)
+{
+    if (fabs(n) < EPS)
+        return 1;
+    else
+        return 0;
+}
+
+int Clear_board()
+{
+        int symbol = 0;
+
+        while ((symbol = getchar()) != '\n')
+        {
+            ;
+        }
+}
