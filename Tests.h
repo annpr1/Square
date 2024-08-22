@@ -5,7 +5,7 @@
 //! @param [in]  a a-coefficient for test
 //! @param [in]  b b-coefficient for test
 //! @param [in]  c c-coefficient for test
-//! @param [in] expected_numRoots right number of roots for this example
+//! @param [in]  expected_numRoots right number of roots for this example
 //!
 //! @return 1 or 0 - was the solution correct or no
 //!
@@ -21,7 +21,7 @@ int RunTest(double a, double b, double c, double expected_x1, double expected_x2
 //!
 //! @param [out] summ number of right answers
 //!
-//! @note   ans[10] array with results of tests
+//! @note   test_res[10] array with results of tests
 //!
 //!-------------------------------------------------------------------------
 
