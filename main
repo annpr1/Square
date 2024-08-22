@@ -1,0 +1,56 @@
+//-------------------------------------------------
+//! Solves a square equation ax2 + bx + c = 0
+//!
+//! @param [in]   a a-coefficient
+//! @param [in]   b b-coefficient
+//! @param [in]   c c-coefficient
+//! @param [out] x1 first root
+//! @param [out] x2 second root
+//!
+//! @return number of roots
+//!
+//! @note   INF_ROOTS - infinity numbers of roots
+//!
+//-------------------------------------------------
+
+#include <stdio.h>
+#include <math.h>
+#include <assert.h>
+
+#include "Square.h"
+#include "support.h"
+#include "Tests.h"
+
+#define SOLVE 1
+#define TEST 2
+
+int main()         // прочитать про аргументы командной строки // strcmp()
+{
+    printf("If you want to solve the square print 1\n");
+    printf("If you want to check tests print 2\n");
+
+    int choice;
+    scanf("%d", &choice);
+
+    if (choice == SOLVE)
+    {
+        double x1 = 0, x2 = 0;
+        struct square first = {};
+        first.x1 = &x1;
+        first.x2 = &x2;
+
+        printf("# SquareSolver\n" "# (c), Ann, 2024\n");
+        printf("# Enter a, b, c: ");
+
+        while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+        {
+            ClearBuffer();
+
+            printf("Enter again please\n");
+        }
+
+        PrintResult(first);
+    }
+    else if (choice == TEST)
+        CheckProgram();
+}
