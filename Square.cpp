@@ -11,21 +11,33 @@ int SquareSolver(struct square first)
     assert(first.x2 != NULL);
     assert(first.x1 != first.x2);
 
-    if (Compare_with_null(first.a))
+    if (CompareFloats(first.a, 0))
     {
-        if (Compare_with_null(first.b))
+        return LineEquation(first);
+    }
+    else
+    {
+        return SquareEquation(first);
+    }
+
+}
+
+int LineEquation(struct square first)
+{
+    if (CompareFloats(first.b, 0))
         {
-            return (Compare_with_null(first.c)) ? INF_ROOTS : NO_ROOTS;
+            return (CompareFloats(first.c, 0)) ? INF_ROOTS : NO_ROOTS;
         }
         else
         {
             *first.x1 = -first.c / first.b;
             return ONE_ROOT;
         }
-    }
-    else
-    {
-        if (first.b == 0)
+}
+
+int SquareEquation(struct square first)
+{
+    if (first.b == 0)
         {
             if (first.c == 0)
             {
@@ -46,20 +58,19 @@ int SquareSolver(struct square first)
         }
         else
         {
-            if ((pow(first.b, 2) - 4 * first.a * first.c) > 0)
+            double discr = first.b * first.b - 4 * first.a * first.c;
+            if (discr > 0)
             {
-                *first.x1 = (-first.b + sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
-                *first.x2 = (-first.b - sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
+                *first.x1 = (-first.b + sqrt(discr)) / (2 * first.a);
+                *first.x2 = (-first.b - sqrt(discr)) / (2 * first.a);
                 return TWO_ROOTS;
             }
-            else if ((first.b * first.b - 4 * first.a * first.c) < 0)
+            else if (discr < 0)
                 return NO_ROOTS;
             else
             {
-                *first.x1 = (-first.b + sqrt(pow(first.b, 2) - 4 * first.a * first.c)) / (2 * first.a);
+                *first.x1 = (-first.b + sqrt(discr)) / (2 * first.a);
                 return ONE_ROOT;
             }
         }
-    }
-
 }
