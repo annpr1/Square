@@ -31,5 +31,7 @@ struct square
 };
 
 int SquareSolver(struct square first);
+int LineEquation(struct square first);
+int SquareEquation(struct square first);
 
 #endif // SQUARE_H_INCLUDED
