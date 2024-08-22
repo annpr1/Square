@@ -27,6 +27,19 @@ int CompareFloats(double n1, double n2);
 
 void ClearBuffer();
 
+//--------------------------------------------------
+//!
+//! @param [in] struct square first structure with elements of square
+//!
+//! @return result of all program
+//!
+//! @note   INF_ROOTS infinity number of roots
+//!         NO_ROOTS  no roots
+//!         ONE_ROOT  one root
+//!         TWO_ROOTS two roots
+//!
+//--------------------------------------------------
+
 void PrintResult(struct square first);
 
 #endif // SUPPORT_FUNCTIONS_H_INCLUDED
