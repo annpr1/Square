@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+#include <string.h>
 
 #include "Square.h"
 #include "support.h"
@@ -24,15 +25,9 @@
 #define SOLVE 1
 #define TEST 2
 
-int main()         // прочитать про аргументы командной строки // strcmp()
+int main(int argc, char * argv[])         // прочитать про аргументы командной строки // strcmp()
 {
-    printf("If you want to solve the square print 1\n");
-    printf("If you want to check tests print 2\n");
-
-    int choice;
-    scanf("%d", &choice);
-
-    if (choice == SOLVE)
+    if (strcmp (argv[1], "solve") == 0)
     {
         double x1 = 0, x2 = 0;
         struct square first = {};
@@ -51,6 +46,10 @@ int main()         // прочитать про аргументы команд�
 
         PrintResult(first);
     }
-    else if (choice == TEST)
+    else if (strcmp (argv[1], "test") == 0)
         CheckProgram();
 }
+
+
+
+
