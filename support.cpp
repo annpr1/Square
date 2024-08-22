@@ -12,7 +12,7 @@ int CompareFloats(double n1, double n2)
         return 0;
 }
 
-void Clearbuffer()
+void ClearBuffer()
 {
     while (getchar() != '\n')
     {
