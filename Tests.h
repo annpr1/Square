@@ -15,7 +15,7 @@
 //!
 //!-------------------------------------------------------------------------
 
-int RunTest(double a, double b, double c, double expected_x1, double expected_x2, int expected_numRoots);
+int RunTest(struct Check Test);
 
 //--------------------------------------------------------------------------
 //!
