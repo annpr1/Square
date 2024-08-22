@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-#include"Tests.h"
+#include "Tests.h"
 #include "Square.h"
+
+#define NUM_TESTS 10
 
 int RunTest(double a, double b, double c, double expected_x1, double expected_x2, int expected_numRoots)
 {
@@ -23,24 +25,23 @@ int RunTest(double a, double b, double c, double expected_x1, double expected_x2
 
 void CheckProgram()
 {
- // массив структур
-    int ans[10];
-    ans[0] = RunTest(1,  4,  3,   -1,   -3,   2); //D > 0, два корня
-    ans[1] = RunTest(1,  2,  3,    0,    0,   0); //D < 0, нет корней
-    ans[2] = RunTest(1, -2,  1,    1,    0,   1); //D = 0, один корень
-    ans[3] = RunTest(1,  5, 2.25, -0.5, -4.5, 2); //Дробный коэффициент
-    ans[4] = RunTest(0,  0,  0,    0,    0,  -1); //a = 0, b = 0, c = 0, бесконечные решения
-    ans[5] = RunTest(0,  0,  1,    0,    0,   0); //a = 0, b = 0, нет корней
-    ans[6] = RunTest(0,  5,  1,   -0.2,  0,   1); //а = 0, один корень
-    ans[7] = RunTest(1,  0, -4,    2,   -2,   2); //b = 0, два корня
-    ans[8] = RunTest(1,  0,  0,    0,    0,   1); //b = 0, с = 0, один корень
-    ans[9] = RunTest(4,  2,  0,    0,   -0.5, 2); //с = 0, два корня
+ // РјР°СЃСЃРёРІ СЃС‚СЂСѓРєС‚СѓСЂ
+    int test_res[NUM_TESTS];
+    test_res[0] = RunTest(1,  4,  3,    -1,   -3,   2); //D > 0, РґРІР° РєРѕСЂРЅСЏ
+    test_res[1] = RunTest(1,  2,  3,     0,    0,   0); //D < 0, РЅРµС‚ РєРѕСЂРЅРµР№
+    test_res[2] = RunTest(1, -2,  1,     1,    0,   1); //D = 0, РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+    test_res[3] = RunTest(1,  5,  2.25, -0.5, -4.5, 2); //Р”СЂРѕР±РЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
+    test_res[4] = RunTest(0,  0,  0,     0,    0,  -1); //a = 0, b = 0, c = 0, Р±РµСЃРєРѕРЅРµС‡РЅС‹Рµ СЂРµС€РµРЅРёСЏ
+    test_res[5] = RunTest(0,  0,  1,     0,    0,   0); //a = 0, b = 0, РЅРµС‚ РєРѕСЂРЅРµР№
+    test_res[6] = RunTest(0,  5,  1,    -0.2,  0,   1); //Р° = 0, РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+    test_res[7] = RunTest(1,  0, -4,     2,   -2,   2); //b = 0, РґРІР° РєРѕСЂРЅСЏ
+    test_res[8] = RunTest(1,  0,  0,     0,    0,   1); //b = 0, СЃ = 0, РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+    test_res[9] = RunTest(4,  2,  0,     0,   -0.5, 2); //СЃ = 0, РґРІР° РєРѕСЂРЅСЏ
     int i = 0, summ = 0;
-    while (i < 10)
+    while (i < NUM_TESTS)
     {
-        printf("Test %d: %d \n", i + 1, ans[i]);
-        summ += ans[i];
-        i++;
+        printf("Test %d: %d \n", i + 1, test_res[i]);
+        summ += test_res[i++];
     }
     printf("Number of right answers %d", summ);
 
