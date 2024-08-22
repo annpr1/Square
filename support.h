@@ -1,6 +1,11 @@
 #ifndef SUPPORT_FUNCTIONS_H_INCLUDED
 #define SUPPORT_FUNCTIONS_H_INCLUDED
+
 #define EPS 0.00000001
+#define INF_ROOTS -1
+#define NO_ROOTS  0
+#define ONE_ROOT  1
+#define TWO_ROOTS 2
 
 //--------------------------------------------------
 //!
@@ -12,14 +17,16 @@
 //!
 //--------------------------------------------------
 
-int Compare_with_null(double n);
+int CompareFloats(double n1, double n2);
 
 //--------------------------------------------------
 //!
-//! @param [in] symbol symbol that we get from desk by getchar
+//! @param [in] symbol symbol thatClearBuffer we get from desk by getchar
 //!
 //--------------------------------------------------
 
-void Clear_board();
+void ClearBuffer();
+
+void PrintResult(struct square first);
 
 #endif // SUPPORT_FUNCTIONS_H_INCLUDED
