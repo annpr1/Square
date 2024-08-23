@@ -23,7 +23,7 @@ int RunTest(struct Check Test)
 
     if (numRoots != Test.exp_num || x1 != Test.exp_x1 || x2 != Test.exp_x2)
     {
-        printf("\nError Test, a = %lg, b = %lg, c = %lg, x1 = %lg, x2 = %lg, numRoots = %lg"
+        printf("\nError Test, a = %lg, b = %lg, c = %lg, x1 = %lg, x2 = %lg, numRoots = %lg\n"
               "Expected x1 = %lg, x2 = %lg, numRoots = %lg\n", test.a, test.b, test.c,
               x1, x2, numRoots, Test.exp_x1, Test.exp_x2, Test.exp_num);
         return 0;
@@ -33,21 +33,26 @@ int RunTest(struct Check Test)
 
 }
 
-void CheckProgram()
+void CheckProgram(char* test_file)
 {
+    FILE* f = fopen(test_file, "r");
+
+    struct Check Test[10] = {};
+
     int test_res[NUM_TESTS];
-    struct Check Test[10] = { {1,  4,  3,    -1,   -3,   2}, {1,  2,  3,     0,    0,   0},
-                              {1, -2,  1,     1,    0,   1}, {1,  5,  2.25, -0.5, -4.5, 2},
-                              {0,  0,  0,     0,    0,  -1}, {0,  0,  1,     0,    0,   0},
-                              {0,  5,  1,    -0.2,  0,   1}, {1,  0, -4,     2,   -2,   2},
-                              {1,  0,  0,     0,    0,   1}, {4,  2,  0,     0,   -0.5, 2} };
-    int i = 0, summ = 0;
+    int i = 0, summ = 0, n = 0;
+
     while (i < NUM_TESTS)
     {
+        n = fscanf(f, "%lg %lg %lg %lg %lg %d\n",
+                    &Test[i].a, &Test[i].b, &Test[i].c, &Test[i].exp_x1, &Test[i].exp_x2, &Test[i].exp_num);
         test_res[i] = RunTest(Test[i]);
+
         printf("Test %d: %d \n", i + 1, test_res[i]);
         summ += test_res[i++];
     }
+
+    fclose(f);
     printf("Number of right answers %d", summ);
 
 }
