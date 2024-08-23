@@ -27,27 +27,34 @@
 
 int main(int argc, char* argv[])         // прочитать про аргументы командной строки // strcmp()
 {
-    if (strcmp (argv[1], "solve") == 0)
+    if (argc == 3)
     {
-        double x1 = 0, x2 = 0;
-        struct square first = {};
-        first.x1 = &x1;
-        first.x2 = &x2;
-
-        printf("# SquareSolver\n" "# (c), Ann, 2024\n");
-        printf("# Enter a, b, c: ");
-
-        while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+        if (strcmp (argv[1], "solve") == 0)
         {
-            ClearBuffer();
+            double x1 = 0, x2 = 0;
+            struct square first = {};
+            first.x1 = &x1;
+            first.x2 = &x2;
 
-            printf("Enter again please\n");
+            printf("# SquareSolver\n" "# (c), Ann, 2024\n");
+            printf("# Enter a, b, c: ");
+
+            while (scanf("%lg %lg %lg", &first.a, &first.b, &first.c) != 3)
+            {
+                ClearBuffer();
+
+                printf("Enter again please\n");
+            }
+
+            PrintResult(first);
         }
-
-        PrintResult(first);
+        else if (!strcmp (argv[1], "test"))
+            CheckProgram(argv[2]);
     }
-    else if (!strcmp (argv[1], "test"))
-        CheckProgram();
+    else
+    {
+        printf("Please, choose mode of program: solve or test");
+    }
 }
 
 
