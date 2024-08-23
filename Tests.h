@@ -25,6 +25,6 @@ int RunTest(struct Check Test);
 //!
 //!-------------------------------------------------------------------------
 
-void CheckProgram();
+void CheckProgram(char* test_file);
 
 #endif // TESTS_H_INCLUDED
